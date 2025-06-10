@@ -106,13 +106,13 @@ top_10_paises = (
 # Filtrar datos para esos países
 df_top10 = df_anio[df_anio['Country_Name'].isin(top_10_paises)]
 
-# Agrupar por país: suma de producción, y promedio del indicador (puedes cambiar a último valor si prefieres)
+# Agrupar por país: suma de producción, y promedio del indicador
 df_disp = (
     df_top10
     .groupby('Country_Name')
     .agg({
         'Valor': 'sum',
-        columna: 'mean'  # también puedes usar 'first' si prefieres
+        columna: 'mean'
     })
     .reset_index()
     .dropna()
@@ -137,8 +137,6 @@ fig4.update_layout(
     margin=dict(l=60, r=40, t=60, b=60)
 )
 
-# Opcional: evitar que las etiquetas se monten en los puntos (ya usamos textposition)
-# Si quieres que las etiquetas sean desplegables al pasar el cursor, puedes usar hoverinfo
 fig4.update_traces(
     hoverinfo='text+x+y',  # muestra país y valores al pasar el mouse
     mode='markers+text',
